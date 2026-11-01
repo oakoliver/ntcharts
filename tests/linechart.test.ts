@@ -1,4 +1,5 @@
 // Port of upstream linechart/{linechart,golden,axis,scale}_test.go.
+import * as linechartNs from '../src/linechart/index.js';
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -1030,5 +1031,26 @@ describe('update handlers with a zone manager', () => {
     expect(m.zoneID()).toBe('zone1');
     expect(m.view().startsWith('[')).toBe(true);
     expect(marked).toEqual(['zone1']);
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('linechart zone ID', () => {
+  const zm = () => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id: string, v: string) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = linechartNs.New(10, 4, 0, 1, 0, 1, linechartNs.WithZoneID('chart'), linechartNs.WithZoneManager(zm()));
+    const b = linechartNs.New(10, 4, 0, 1, 0, 1, linechartNs.WithZoneManager(zm()), linechartNs.WithZoneID('chart'));
+    expect(a.zoneID()).toBe('chart');
+    expect(b.zoneID()).toBe('chart');
+    expect(a.view().startsWith('<chart>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const m = linechartNs.New(10, 4, 0, 1, 0, 1, linechartNs.WithZoneManager(zm()), linechartNs.WithZoneID(''));
+    expect(m.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
   });
 });

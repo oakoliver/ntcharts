@@ -1,4 +1,5 @@
 // Port of upstream linechart/wavelinechart/{golden,scale,y2,wavelinechart}_test.go.
+import * as wlcNs from '../src/linechart/wavelinechart/index.js';
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -260,5 +261,26 @@ describe('wavelinechart_test.go', () => {
     m.setViewYRange(0, 5);
     const want = m.graphHeight() / (m.viewMaxY() - m.viewMinY());
     expect(m['dSets'].get(DefaultDataSetName)!.pBuf.scale().y).toBe(want);
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('wavelinechart zone ID', () => {
+  const zm = () => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id: string, v: string) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = wlcNs.New(10, 4, wlcNs.WithZoneID('chart'), wlcNs.WithZoneManager(zm()));
+    const b = wlcNs.New(10, 4, wlcNs.WithZoneManager(zm()), wlcNs.WithZoneID('chart'));
+    expect(a.zoneID()).toBe('chart');
+    expect(b.zoneID()).toBe('chart');
+    expect(a.view().startsWith('<chart>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const m = wlcNs.New(10, 4, wlcNs.WithZoneManager(zm()), wlcNs.WithZoneID(''));
+    expect(m.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
   });
 });

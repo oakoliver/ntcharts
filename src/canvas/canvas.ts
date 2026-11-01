@@ -463,6 +463,19 @@ export class Model {
     return this._zoneID;
   }
 
+  /**
+   * SetZoneID sets the zone ID the canvas marks its view with, instead of the
+   * unique prefix the zone Manager hands out by default. This is an addition to
+   * upstream: with a fixed ID, code that shares zone IDs between sessions or
+   * programs needs no mapping. The ID is used as is, so it must be unique among
+   * the zones of one Manager, and it works in either order with setZoneManager().
+   * An empty ID goes back to a generated prefix once a Manager is set.
+   */
+  setZoneID(id: string): void {
+    this._zoneID = id;
+    if (id === '' && this._zoneManager != null) this._zoneID = this._zoneManager.newPrefix();
+  }
+
   /** ShiftUp moves all Cells up once. Last CellLine will be set to a new CellLine. */
   shiftUp(): void {
     const c = this.content;

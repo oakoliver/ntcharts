@@ -9,6 +9,7 @@ import {
   WithFocus,
   WithViewHeight,
   WithViewWidth,
+  WithZoneID,
   WithZoneManager,
   type Float64Point,
 } from '../src/canvas/index.js';
@@ -166,5 +167,27 @@ describe('canvas', () => {
     c.update({ _tag: 'MouseClickMsg', x: 1, y: 1, button: 1 } as never);
     c.update({ _tag: 'MouseMotionMsg', x: 5, y: 5, button: 1 } as never);
     expect(c.cursor()).toEqual({ x: 0, y: 0 });
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('canvas zone ID', () => {
+  const zm = (): ZoneManager => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id, v) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = New(4, 2, WithZoneID('canvas'), WithZoneManager(zm()));
+    const b = New(4, 2, WithZoneManager(zm()), WithZoneID('canvas'));
+    expect(a.zoneID()).toBe('canvas');
+    expect(b.zoneID()).toBe('canvas');
+    expect(a.view().startsWith('<canvas>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const c = New(4, 2, WithZoneManager(zm()), WithZoneID(''));
+    expect(c.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
+    expect(New(4, 2, WithZoneID('')).zoneID()).toBe('');
   });
 });

@@ -191,7 +191,7 @@ These snippets are [`examples/usage/`](examples/usage/). A test runs each of the
 
 ### In Ink
 
-Put `view()` in a `<Text>`. Ink 5 mishandles the short reset `ESC[m` that Lip Gloss writes when the text sits inside a `<Box>` with a border (the colors leak and the widths go wrong), so spell it `ESC[0m`:
+Put `view()` in a `<Text>`. Ink's tokenizer, `@alcalzone/ansi-tokenize`, counts the short reset `ESC[m` that Lip Gloss writes as three visible characters in versions below 0.2.2, so inside a `<Box>` with a border the widths go wrong and the colors can leak. Ink 5.x and Ink 6.0 to 6.2.0 depend on `^0.1.3` and are affected; Ink 6.2.3 and later (and Ink 7 and 8) install 0.2.2 or later and are not. Upgrading Ink is the better fix. If you cannot, or a lockfile pins the tokenizer below 0.2.2, spell the reset `ESC[0m` as in the `replaceAll` below, which is otherwise not needed:
 
 ```tsx
 import React, { useEffect, useState } from 'react';
@@ -276,6 +276,12 @@ await NewProgram(new Quickstart(chart, zm)).run();
 
 Mouse support needs three things: a manager from `zone.New()` given to the chart (`setZoneManager` or the `WithZoneManager` option), mouse reporting turned on in the view (`mouseMode`), and the root view wrapped in `zm.scan()`. The charts do not import `@oakoliver/bubblezone`; they accept any object with its `newPrefix`, `mark` and `get` methods.
 
+Zone IDs: by default a chart takes its zone ID from the manager's `newPrefix()`, which counts across the whole process, so the ID differs between programs and sessions. As in upstream, the ID is only set when you give the chart a manager. To fix it, pass `WithZoneID('station/map')` (or call `setZoneID`), available on `canvas`, `barchart`, `linechart`, `streamlinechart`, `timeserieslinechart` and `wavelinechart`; it works before or after `WithZoneManager`. The ID is used as is, so it must be unique among the zones of one manager. `heatmap` and `sparkline` do not mark zones.
+
+### Reusing a sparkline
+
+With `autoMaxValue` (the default) a sparkline's maximum only grows, and, as upstream, `clear()` keeps it, so a sparkline reused for new data keeps the old scale. Call `resetMax()` to go back to the maximum last set with `setMax()` or `WithMaxValue()` (1 if none was): `sl.clear(); sl.resetMax();`.
+
 ## Chart types
 
 One small program per chart type, each a port of an upstream example. Keys and details are in [`examples/README.md`](examples/README.md).
@@ -350,7 +356,7 @@ The port follows ntcharts v2.9.0 (Bubble Tea v2 branch, tag `v2.9.0`), and its o
 - **Parity scenarios.** [`tests/parity/go`](tests/parity/go) is a Go program that renders scenarios with upstream ntcharts and writes their output to `tests/parity/goldens.json`; [`tests/parity.test.ts`](tests/parity.test.ts) renders the same scenarios with the port and compares them byte for byte, styles included. The comparison normalises one thing: Go's Lip Gloss writes `ESC[1;7;44m` where the TypeScript Lip Gloss writes `ESC[1mESC[7mESC[44m`; adjacent style sequences are merged before comparing.
 - **Go's float arithmetic.** Matching byte for byte needs Go's floating point: on arm64 Go compiles `a*b + c` to one fused multiply-add, and Go's `math.Log`, `Log10`, `Exp` and `Pow` differ from JavaScript's `Math` in the last bit for many inputs. Those last bits move tick labels and scaled points from one cell to the next. `src/internal/gomath.ts` has an exact `fma` and ports of Go's algorithms, used where upstream's results reach the screen. The goldens are generated on arm64 (an Apple Mac); on amd64, Go does not fuse, so a few labels could differ by one cell from what Go prints there.
 
-`bun test` runs 853 tests: 505 from upstream's 294 Go tests and examples in 43 test files (table tests become one test per case), 342 parity scenarios rendered by Go and by the port (canvas 33, graph 69, runes 8, barchart 29, sparkline 21, heatmap 28, linechart 27, streamlinechart 19, timeserieslinechart 23, wavelinechart 16, spec 61, README snippets 8), plus checks that the README samples are the tested programs and that clicks and drags work through `@oakoliver/bubblezone`. All pass.
+`bun test` runs 872 tests: 505 from upstream's 294 Go tests and examples in 43 test files (table tests become one test per case), 342 parity scenarios rendered by Go and by the port (canvas 33, graph 69, runes 8, barchart 29, sparkline 21, heatmap 28, linechart 27, streamlinechart 19, timeserieslinechart 23, wavelinechart 16, spec 61, README snippets 8), plus checks that the README samples are the tested programs, that clicks and drags work through `@oakoliver/bubblezone`, and 19 tests of the additions in 1.1.0 (`resetMax()` and `WithZoneID`). All pass.
 
 What differs from Go, on purpose:
 

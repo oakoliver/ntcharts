@@ -42,3 +42,25 @@ test('dragging a time series chart moves its time window', () => {
   chart.update(drag(15, 5)); // drag left: the window moves to earlier dates, as upstream
   expect(chart.viewMinX()).toBeLessThan(before);
 });
+
+test('a fixed zone ID is the same in every manager and program', () => {
+  const ids = [zone.New(), zone.New()].map((zm) => {
+    const c = canvas.New(4, 2, canvas.WithZoneManager(zm), canvas.WithZoneID('station/map'));
+    return c.zoneID();
+  });
+  expect(ids).toEqual(['station/map', 'station/map']);
+  // generated prefixes keep coming from the global counter
+  const g1 = canvas.New(4, 2, canvas.WithZoneManager(zone.New())).zoneID();
+  const g2 = canvas.New(4, 2, canvas.WithZoneManager(zone.New())).zoneID();
+  expect(g1).not.toBe(g2);
+});
+
+test('clicks reach a chart that has a fixed zone ID', () => {
+  const zm = zone.New();
+  const c = canvas.New(40, 20, canvas.WithZoneManager(zm), canvas.WithZoneID('fixed'), canvas.WithViewWidth(10), canvas.WithViewHeight(5), canvas.WithFocus());
+  zm.scan('header\n' + c.view());
+  expect(zm.get('fixed')).toBeTruthy();
+  c.update(click(3, 3));
+  c.update(drag(4, 4));
+  expect(c.cursor()).toEqual({ x: 1, y: 1 });
+});

@@ -141,3 +141,62 @@ describe('sparkline quadrants', () => {
     assertView(sl.view(), ['▟▟']);
   });
 });
+
+// Not upstream tests: resetMax() is an addition. Upstream's Clear() keeps the
+// maximum, which only grows with AutoMaxValue, so the port does too.
+describe('sparkline resetMax', () => {
+  test('clear keeps the grown automatic maximum, as upstream', () => {
+    const sl = New(10, 4);
+    sl.push(80);
+    sl.clear();
+    expect(sl.maxValue()).toBe(80);
+    expect(sl.scale()).toBe(4 / 80);
+  });
+
+  test('resetMax goes back to the default maximum of 1', () => {
+    const sl = New(10, 4);
+    sl.push(80);
+    sl.clear();
+    sl.resetMax();
+    expect(sl.maxValue()).toBe(1);
+    expect(sl.scale()).toBe(4);
+    sl.push(3);
+    expect(sl.maxValue()).toBe(3); // the automatic maximum grows again from the reset
+  });
+
+  test('resetMax goes back to the maximum set with WithMaxValue or setMax', () => {
+    const sl = New(10, 4, WithMaxValue(10));
+    sl.push(50);
+    expect(sl.maxValue()).toBe(50);
+    sl.resetMax();
+    expect(sl.maxValue()).toBe(10);
+    expect(sl.scale()).toBe(0.4);
+    sl.setMax(20);
+    sl.push(100);
+    sl.resetMax();
+    expect(sl.maxValue()).toBe(20);
+  });
+
+  test('resetMax rescales the existing data and keeps it', () => {
+    const sl = New(4, 2);
+    sl.pushAll([2, 8]);
+    expect(sl.maxValue()).toBe(8);
+    sl.resetMax();
+    expect(sl.scale()).toBe(2);
+    expect(sl['buf'].readAll()).toEqual([2 * 2, 8 * 2]); // scaled by the new scale, nothing lost
+  });
+
+  test('a sparkline reused after clear and resetMax draws like a new one', () => {
+    const reused = New(8, 3);
+    reused.pushAll([100, 200, 50]);
+    reused.clear();
+    reused.resetMax();
+    const fresh = New(8, 3);
+    for (const sl of [reused, fresh]) {
+      sl.pushAll([1, 2, 3, 2, 1]);
+      sl.draw();
+    }
+    expect(reused.view()).toBe(fresh.view());
+    expect(reused.maxValue()).toBe(fresh.maxValue());
+  });
+});

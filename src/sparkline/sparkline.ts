@@ -33,6 +33,7 @@ export class Model {
   maxInterpolationPoints = 0;
 
   private max = 1; // expected maximum data value
+  private baseMax = 1; // the maximum last set explicitly: what resetMax() goes back to
   private buf: Float64ScaleRingBuffer; // buffer with size of twice the canvas width
 
   /** Use New(w, h, ...opts). */
@@ -66,6 +67,25 @@ export class Model {
    * Existing values will be updated to new scaling.
    */
   setMax(f: number): void {
+    this.baseMax = f;
+    this.applyMax(f);
+  }
+
+  /**
+   * ResetMax puts the expected maximum back to the value last set with setMax()
+   * or WithMaxValue(), or to 1 if none was set, undoing the growth of the
+   * automatic maximum. Existing values are updated to the new scaling.
+   * This is an addition to upstream: there, neither Clear() nor anything else
+   * lowers the maximum again, so a sparkline reused for new data keeps the
+   * scale of the old. Call it after clear() to start over:
+   * sl.clear(); sl.resetMax().
+   */
+  resetMax(): void {
+    this.applyMax(this.baseMax);
+  }
+
+  // applyMax changes the expected maximum without making it the one resetMax() returns to.
+  private applyMax(f: number): void {
     this.max = f;
     this.buf.setScale(this.canvas.height() / this.max);
   }
@@ -89,7 +109,11 @@ export class Model {
     }
   }
 
-  /** Clear will reset sparkline canvas and data. */
+  /**
+   * Clear will reset sparkline canvas and data.
+   * As upstream, it keeps the expected maximum, which grows with the data when
+   * autoMaxValue is set: call resetMax() as well to reset the scale.
+   */
   clear(): void {
     this.canvas.clear();
     this.buf.clear();
@@ -102,7 +126,7 @@ export class Model {
    */
   push(f: number): void {
     const v = Math.max(f, 0);
-    if (this.autoMaxValue && v > this.max) this.setMax(v);
+    if (this.autoMaxValue && v > this.max) this.applyMax(v);
     this.buf.push(v);
   }
 

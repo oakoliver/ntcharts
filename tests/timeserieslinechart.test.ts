@@ -1,5 +1,6 @@
 // Port of upstream linechart/timeserieslinechart/{golden,scale,y2,timeserieslinechart,
 // candle_width,window}_test.go.
+import * as tslcNs from '../src/linechart/timeserieslinechart/index.js';
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -680,5 +681,26 @@ describe('window_test.go', () => {
     expect(m.trimBefore(add(base, 3e3))).toBe(0);
     m.push({ time: add(base, 3e3), value: 5 });
     expect(m['dSets'].get(DefaultDataSetName)!.tBuf.length()).toBe(1);
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('timeserieslinechart zone ID', () => {
+  const zm = () => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id: string, v: string) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = tslcNs.New(10, 4, tslcNs.WithZoneID('chart'), tslcNs.WithZoneManager(zm()));
+    const b = tslcNs.New(10, 4, tslcNs.WithZoneManager(zm()), tslcNs.WithZoneID('chart'));
+    expect(a.zoneID()).toBe('chart');
+    expect(b.zoneID()).toBe('chart');
+    expect(a.view().startsWith('<chart>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const m = tslcNs.New(10, 4, tslcNs.WithZoneManager(zm()), tslcNs.WithZoneID(''));
+    expect(m.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
   });
 });

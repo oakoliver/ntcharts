@@ -1,4 +1,5 @@
 // Port of upstream linechart/streamlinechart/{golden,scale,y2}_test.go.
+import * as slcNs from '../src/linechart/streamlinechart/index.js';
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -169,5 +170,26 @@ describe('y2_test.go', () => {
     for (const v of [95, 90, 80, 85, 60, 70, 40, 50, 20, 30, 5, 10]) m.pushDataSet('r', v);
     m.drawAll();
     golden('twoaxes', m.view());
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('streamlinechart zone ID', () => {
+  const zm = () => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id: string, v: string) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = slcNs.New(10, 4, slcNs.WithZoneID('chart'), slcNs.WithZoneManager(zm()));
+    const b = slcNs.New(10, 4, slcNs.WithZoneManager(zm()), slcNs.WithZoneID('chart'));
+    expect(a.zoneID()).toBe('chart');
+    expect(b.zoneID()).toBe('chart');
+    expect(a.view().startsWith('<chart>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const m = slcNs.New(10, 4, slcNs.WithZoneManager(zm()), slcNs.WithZoneID(''));
+    expect(m.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
   });
 });

@@ -15,6 +15,17 @@ export function WithZoneManager(zm: ZoneManager | null): Option {
   };
 }
 
+/**
+ * WithZoneID sets the zone ID the chart marks its view with, instead of the unique
+ * prefix the zone Manager generates, so zone IDs are stable across sessions and
+ * programs. The ID must be unique among the zones of one Manager.
+ */
+export function WithZoneID(id: string): Option {
+  return (m: Model) => {
+    m.setZoneID(id);
+  };
+}
+
 /** WithStyles sets the axis line and label string styles. */
 export function WithStyles(as: Style, ls: Style): Option {
   return (m: Model) => {

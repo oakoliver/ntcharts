@@ -2,6 +2,7 @@
 // TypeScript port - Copyright (c) 2026 Antonio Oliveira.
 //
 // Port of barchart/barchart_test.go and barchart/barchart_bidirectional_test.go.
+import * as barchartNs from '../src/barchart/index.js';
 import { describe, expect, test } from 'bun:test';
 import { newStyle } from '@oakoliver/lipgloss';
 import * as canvas from '../src/canvas/index.js';
@@ -378,5 +379,26 @@ describe('barchart bidirectional', () => {
         }
       }
     }
+  });
+});
+
+// Not upstream tests: WithZoneID/setZoneID are an addition.
+describe('barchart zone ID', () => {
+  const zm = () => {
+    let n = 0;
+    return { newPrefix: () => `gen${++n}`, mark: (id: string, v: string) => `<${id}>${v}`, get: () => null };
+  };
+
+  test('WithZoneID sets a stable ID in either order and skips the generated prefix', () => {
+    const a = barchartNs.New(10, 4, barchartNs.WithZoneID('chart'), barchartNs.WithZoneManager(zm()));
+    const b = barchartNs.New(10, 4, barchartNs.WithZoneManager(zm()), barchartNs.WithZoneID('chart'));
+    expect(a.zoneID()).toBe('chart');
+    expect(b.zoneID()).toBe('chart');
+    expect(a.view().startsWith('<chart>')).toBe(true);
+  });
+
+  test('an empty ID goes back to a generated prefix once there is a manager', () => {
+    const m = barchartNs.New(10, 4, barchartNs.WithZoneManager(zm()), barchartNs.WithZoneID(''));
+    expect(m.zoneID()).not.toBe(''); // a new prefix, as the manager would hand out
   });
 });

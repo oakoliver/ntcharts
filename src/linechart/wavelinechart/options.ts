@@ -34,6 +34,17 @@ export function WithZoneManager(zm: ZoneManager | null): Option {
 }
 
 /**
+ * WithZoneID sets the zone ID the chart marks its view with, instead of the unique
+ * prefix the zone Manager generates, so zone IDs are stable across sessions and
+ * programs. The ID must be unique among the zones of one Manager.
+ */
+export function WithZoneID(id: string): Option {
+  return (m: Model) => {
+    m.setZoneID(id);
+  };
+}
+
+/**
  * WithXYSteps sets the number of steps when drawing X and Y axes values.
  * If X steps 0, then X axis will be hidden.
  * If Y steps 0, then Y axis will be hidden.

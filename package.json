@@ -1,6 +1,6 @@
 {
   "name": "@oakoliver/ntcharts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Terminal charts for TypeScript: canvas, bar, line, streaming, time series, wave, sparkline and heatmap charts. Port of NimbleMarkets' ntcharts for Bubble Tea",
   "type": "module",
   "main": "./dist/index.cjs",
