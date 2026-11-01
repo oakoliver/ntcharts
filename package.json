@@ -107,7 +107,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oakoliver/ntcharts"
+    "url": "git+https://github.com/oakoliver/ntcharts.git"
   },
   "homepage": "https://github.com/oakoliver/ntcharts#readme",
   "bugs": {
@@ -127,7 +127,7 @@
   "devDependencies": {
     "@oakoliver/bubbles": "^1.2.2",
     "@oakoliver/bubbletea": "^1.2.1",
-    "@oakoliver/bubblezone": "file:../bubblezone",
+    "@oakoliver/bubblezone": "^1.0.0",
     "@oakoliver/lipgloss": "^1.1.3",
     "@types/node": "^20",
     "esbuild": "^0.28.2",
