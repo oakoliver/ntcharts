@@ -1,0 +1,124 @@
+{
+  "name": "@oakoliver/ntcharts",
+  "version": "1.0.0",
+  "description": "Terminal charts for TypeScript: canvas, bar, line, streaming, time series, wave, sparkline and heatmap charts. Port of NimbleMarkets' ntcharts for Bubble Tea",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./canvas": {
+      "types": "./dist/canvas/index.d.ts",
+      "import": "./dist/canvas/index.js",
+      "require": "./dist/canvas/index.cjs"
+    },
+    "./canvas/runes": {
+      "types": "./dist/canvas/runes/index.d.ts",
+      "import": "./dist/canvas/runes/index.js",
+      "require": "./dist/canvas/runes/index.cjs"
+    },
+    "./canvas/buffer": {
+      "types": "./dist/canvas/buffer/index.d.ts",
+      "import": "./dist/canvas/buffer/index.js",
+      "require": "./dist/canvas/buffer/index.cjs"
+    },
+    "./canvas/graph": {
+      "types": "./dist/canvas/graph/index.d.ts",
+      "import": "./dist/canvas/graph/index.js",
+      "require": "./dist/canvas/graph/index.cjs"
+    },
+    "./barchart": {
+      "types": "./dist/barchart/index.d.ts",
+      "import": "./dist/barchart/index.js",
+      "require": "./dist/barchart/index.cjs"
+    },
+    "./sparkline": {
+      "types": "./dist/sparkline/index.d.ts",
+      "import": "./dist/sparkline/index.js",
+      "require": "./dist/sparkline/index.cjs"
+    },
+    "./heatmap": {
+      "types": "./dist/heatmap/index.d.ts",
+      "import": "./dist/heatmap/index.js",
+      "require": "./dist/heatmap/index.cjs"
+    },
+    "./linechart": {
+      "types": "./dist/linechart/index.d.ts",
+      "import": "./dist/linechart/index.js",
+      "require": "./dist/linechart/index.cjs"
+    },
+    "./linechart/streamlinechart": {
+      "types": "./dist/linechart/streamlinechart/index.d.ts",
+      "import": "./dist/linechart/streamlinechart/index.js",
+      "require": "./dist/linechart/streamlinechart/index.cjs"
+    },
+    "./linechart/timeserieslinechart": {
+      "types": "./dist/linechart/timeserieslinechart/index.d.ts",
+      "import": "./dist/linechart/timeserieslinechart/index.js",
+      "require": "./dist/linechart/timeserieslinechart/index.cjs"
+    },
+    "./linechart/wavelinechart": {
+      "types": "./dist/linechart/wavelinechart/index.d.ts",
+      "import": "./dist/linechart/wavelinechart/index.js",
+      "require": "./dist/linechart/wavelinechart/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build:esm": "esbuild $(find src -name index.ts) --bundle --splitting --format=esm --platform=node --outdir=dist --outbase=src --target=esnext --external:@oakoliver/*",
+    "build:cjs": "esbuild $(find src -name index.ts) --bundle --format=cjs --platform=node --outdir=dist --outbase=src --out-extension:.js=.cjs --target=esnext --external:@oakoliver/*",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "rm -rf dist && npm run build:esm && npm run build:cjs && npm run build:types",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "tui",
+    "terminal",
+    "charts",
+    "chart",
+    "sparkline",
+    "barchart",
+    "linechart",
+    "heatmap",
+    "candlestick",
+    "braille",
+    "bubbletea",
+    "ntcharts",
+    "cli",
+    "typescript"
+  ],
+  "author": "Antonio Oliveira <antonio@oakoliver.com> (https://oakoliver.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oakoliver/ntcharts"
+  },
+  "homepage": "https://github.com/oakoliver/ntcharts#readme",
+  "bugs": {
+    "url": "https://github.com/oakoliver/ntcharts/issues"
+  },
+  "peerDependencies": {
+    "@oakoliver/bubbles": "^1.2.2",
+    "@oakoliver/bubbletea": "^1.2.1",
+    "@oakoliver/lipgloss": "^1.1.3"
+  },
+  "devDependencies": {
+    "@oakoliver/bubbles": "^1.2.2",
+    "@oakoliver/bubbletea": "^1.2.1",
+    "@oakoliver/lipgloss": "^1.1.3",
+    "@types/node": "^20",
+    "esbuild": "^0.28.2",
+    "typescript": "^5"
+  }
+}
