@@ -15,3 +15,4 @@ export * as linechart from './linechart/index.js';
 export * as streamlinechart from './linechart/streamlinechart/index.js';
 export * as timeserieslinechart from './linechart/timeserieslinechart/index.js';
 export * as wavelinechart from './linechart/wavelinechart/index.js';
+export * as spec from './spec/index.js';

@@ -1,0 +1,16 @@
+{
+  "type": "bar",
+  "title": "Revenue by region",
+  "width": 48,
+  "height": 14,
+  "x_axis": {"type": "category", "labels": ["Q1", "Q2", "Q3", "Q4"]},
+  "options": {"stacked": true},
+  "theme": {"palette": ["#5c6bc0", "#26a69a", "#ffa726"]},
+  "data": {
+    "series": [
+      {"name": "EMEA", "values": [{"y": 42}, {"y": 51}, {"y": 47}, {"y": 63}]},
+      {"name": "Americas", "values": [{"y": 35}, {"y": 38}, {"y": 44}, {"y": 49}]},
+      {"name": "APAC", "values": [{"y": 18}, {"y": 22}, {"y": 29}, {"y": 33}]}
+    ]
+  }
+}

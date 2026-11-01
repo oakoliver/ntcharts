@@ -1,0 +1,447 @@
+{
+  "bar-single": {
+    "spec": {"type": "bar", "title": "Quarterly Revenue", "width": 40, "height": 12,
+      "x_axis": {"type": "category", "labels": ["Q1", "Q2", "Q3", "Q4"]},
+      "data": {"series": [{"name": "Revenue", "color": "#22aadd", "values": [{"y": 120}, {"y": 180}, {"y": 95}, {"y": 210}]}]}}
+  },
+  "bar-stacked": {
+    "spec": {"type": "bar", "width": 36, "height": 12,
+      "x_axis": {"labels": ["Mon", "Tue", "Wed", "Thu", "Fri"]},
+      "data": {"series": [
+        {"name": "rev", "values": [{"y": 3}, {"y": 5}, {"y": 2}, {"y": 6}, {"y": 4}]},
+        {"name": "cost", "values": [{"y": 1}, {"y": 2}, {"y": 2}, {"y": 1}]}]},
+      "options": {"stacked": true},
+      "theme": {"palette": ["#63b3ed", "#f6ad55"]}}
+  },
+  "bar-horizontal": {
+    "spec": {"type": "bar", "width": 40, "height": 10,
+      "data": {"series": [{"name": "langs", "color": "2", "values": [{"x": "Go", "y": 42}, {"x": "TypeScript", "y": 37}, {"x": "Rust", "y": 18}]}]},
+      "options": {"orientation": "horizontal"}}
+  },
+  "bar-negative-pins": {
+    "spec": {"type": "bar", "width": 30, "height": 12,
+      "x_axis": {"labels": ["a", "b", "c", "d"]},
+      "y_axis": {"min": -8, "max": 10},
+      "data": {"series": [{"name": "delta", "color": "#ff5555", "values": [{"y": 6}, {"y": -5}, {"y": 3}, {"y": -2}]}]}}
+  },
+  "bar-shared-labels": {
+    "spec": {"type": "bar", "width": 30, "height": 8,
+      "data": {"x_axis_data": ["Q1", 2], "series": [{"name": "s", "values": [{"y": 1}, {"y": 5}, {"y": 3}, {"x": "Q4", "y": 2}]}]}}
+  },
+  "line-two-series": {
+    "spec": {"type": "line", "title": "Two Series", "width": 40, "height": 10,
+      "data": {"series": [
+        {"name": "a", "values": [{"x": 0, "y": 1}, {"x": 1, "y": 3}, {"x": 2, "y": 2}, {"x": 3, "y": 5}]},
+        {"name": "b", "values": [{"x": 0, "y": 4}, {"x": 1, "y": 2}, {"x": 2, "y": 4}, {"x": 3, "y": 1}]}]}}
+  },
+  "line-colors-index-x": {
+    "spec": {"type": "line", "width": 44, "height": 12,
+      "data": {"series": [
+        {"name": "a", "color": "#ff0000", "values": [{"y": 1}, {"y": 3}, {"y": -2}, {"y": 5}, {"y": 4}]},
+        {"name": "b", "values": [{"y": 4}, {"y": 2}, {"y": 4}, {"y": 1}, {"y": 0}]}]},
+      "theme": {"palette": ["#00ff00", "#0000ff"]}}
+  },
+  "line-currency-pins": {
+    "spec": {"type": "line", "width": 40, "height": 10,
+      "y_axis": {"min": 0, "max": 10, "format": {"kind": "currency"}},
+      "x_axis": {"format": {"kind": "number", "precision": 1}},
+      "data": {"series": [{"name": "p", "values": [{"x": 0, "y": 2}, {"x": 0.5, "y": 7.5}, {"x": 1, "y": 5}]}]}}
+  },
+  "line-one-sided-min": {
+    "spec": {"type": "line", "width": 40, "height": 10,
+      "y_axis": {"min": -10, "format": {"kind": "si", "precision": 0}},
+      "data": {"x_axis_data": [10, 20, 30, 40], "series": [{"name": "p", "values": [{"y": 2000}, {"y": 3500}, {"y": 1200}, {"y": 4100}]}]}}
+  },
+  "line-log-y": {
+    "spec": {"type": "line", "title": "Signups", "width": 40, "height": 10,
+      "y_axis": {"scale": "log"},
+      "data": {"series": [{"name": "signups", "values": [{"x": 0, "y": 3}, {"x": 1, "y": 40}, {"x": 2, "y": 150}, {"x": 3, "y": 2500}, {"x": 4, "y": 30000}, {"x": 5, "y": 1000000}]}]}}
+  },
+  "line-log-xy-si": {
+    "spec": {"type": "line", "width": 40, "height": 10,
+      "x_axis": {"scale": "log", "format": {"kind": "si", "precision": 0}},
+      "y_axis": {"scale": "log"},
+      "data": {"series": [{"name": "a", "values": [{"x": 20, "y": 5}, {"x": 700, "y": 50}, {"x": 30000, "y": 500}]}]}}
+  },
+  "line-log-below-one": {
+    "spec": {"type": "line", "width": 44, "height": 14,
+      "y_axis": {"scale": "log", "format": {"kind": "number"}},
+      "data": {"series": [{"name": "a", "values": [{"x": 1, "y": 0.001}, {"x": 10, "y": 0.5}, {"x": 100, "y": 40}, {"x": 1000, "y": 1000}]}]}}
+  },
+  "line-dual-axes": {
+    "spec": {"type": "line", "width": 44, "height": 12,
+      "y2_axis": {},
+      "data": {"series": [
+        {"name": "a", "color": "#00ff00", "values": [{"x": 0, "y": 1}, {"x": 1, "y": 3}, {"x": 2, "y": 2}, {"x": 3, "y": 5}]},
+        {"name": "b", "color": "#ff0000", "y_axis": "right", "values": [{"x": 0, "y": 500}, {"x": 1, "y": 300}, {"x": 2, "y": 400}, {"x": 3, "y": 100}]}]}}
+  },
+  "line-dual-log-right": {
+    "spec": {"type": "line", "width": 46, "height": 12,
+      "y_axis": {"format": {"kind": "percent"}},
+      "y2_axis": {"scale": "log", "format": {"kind": "si"}},
+      "data": {"series": [
+        {"name": "rate", "values": [{"x": 1, "y": 0.1}, {"x": 2, "y": 0.35}, {"x": 3, "y": 0.2}, {"x": 4, "y": 0.6}]},
+        {"name": "users", "color": "#ffaa00", "y_axis": "right", "values": [{"x": 1, "y": 120}, {"x": 2, "y": 4000}, {"x": 3, "y": 25000}, {"x": 4, "y": 900000}]}]}}
+  },
+  "scatter-basic": {
+    "spec": {"type": "scatter", "title": "Fuel Efficiency", "width": 40, "height": 12,
+      "data": {"series": [
+        {"name": "japan", "values": [{"x": 2100, "y": 31.5}, {"x": 1980, "y": 33.1}]},
+        {"name": "usa", "values": [{"x": 2875, "y": 24.0}, {"x": 3200, "y": 19.2}, {"x": 3600, "y": 16.5}]}]}}
+  },
+  "scatter-colors-si": {
+    "spec": {"type": "scatter", "width": 40, "height": 12,
+      "x_axis": {"format": {"kind": "si"}},
+      "y_axis": {"min": 0, "max": 40},
+      "data": {"series": [
+        {"name": "japan", "color": "#22aadd", "values": [{"x": 2100, "y": 31.5, "size": 3}, {"x": 1980, "y": 33.1}]},
+        {"name": "usa", "color": "#dd8822", "values": [{"x": 2875, "y": 24.0}, {"x": 3200, "y": 19.2}, {"x": 3600, "y": 16.5}]}]}}
+  },
+  "scatter-dual": {
+    "spec": {"type": "scatter", "width": 40, "height": 12,
+      "y2_axis": {"min": 200},
+      "data": {"series": [
+        {"name": "a", "color": "#00ff00", "values": [{"x": 0, "y": 1}, {"x": 1, "y": 3}, {"x": 2, "y": 2}, {"x": 3, "y": 5}]},
+        {"name": "b", "color": "#ff0000", "y_axis": "right", "values": [{"x": 0, "y": 500}, {"x": 1, "y": 300}, {"x": 2, "y": 400}, {"x": 3, "y": 250}]}]}}
+  },
+  "scatter-log-both": {
+    "spec": {"type": "scatter", "width": 44, "height": 12,
+      "x_axis": {"scale": "log"}, "y_axis": {"scale": "log"},
+      "data": {"series": [{"name": "a", "values": [
+        {"x": 2, "y": 0.3}, {"x": 9, "y": 4}, {"x": 40, "y": 2}, {"x": 150, "y": 90},
+        {"x": 700, "y": 1200}, {"x": 3000, "y": 800}, {"x": 8000, "y": 60000}]}]}}
+  },
+  "scatter-single-point": {
+    "spec": {"type": "scatter", "width": 30, "height": 8,
+      "data": {"series": [{"name": "a", "values": [{"x": 5, "y": 5}]}]}}
+  },
+  "timeseries-basic": {
+    "spec": {"type": "timeseries", "width": 50, "height": 12,
+      "x_axis": {"type": "time"},
+      "data": {"series": [{"name": "DAU", "color": "#88ccff", "values": [
+        {"x": "2026-01-01T00:00:00Z", "y": 10}, {"x": "2026-01-02T00:00:00Z", "y": 13},
+        {"x": "2026-01-03T00:00:00Z", "y": 11}, {"x": "2026-01-04T00:00:00Z", "y": 19},
+        {"x": "2026-01-05T00:00:00Z", "y": 22}, {"x": "2026-01-06T00:00:00Z", "y": 17},
+        {"x": "2026-01-07T00:00:00Z", "y": 28}]}]}}
+  },
+  "timeseries-month-labels": {
+    "spec": {"type": "timeseries", "width": 44, "height": 12,
+      "x_axis": {"type": "time", "format": {"kind": "time", "layout": "Jan"}},
+      "data": {"series": [{"name": "px", "values": [
+        {"x": 1767225600000, "y": 104.2}, {"x": 1769904000000, "y": 108.9},
+        {"x": 1772323200000, "y": 101.4}, {"x": 1775001600000, "y": 115.7},
+        {"x": 1777593600000, "y": 119.3}, {"x": 1780272000000, "y": 112.8}]}]}}
+  },
+  "timeseries-dual-axes": {
+    "spec": {"type": "timeseries", "width": 44, "height": 12,
+      "y_axis": {"min": 0, "max": 1, "format": {"precision": 1}},
+      "y2_axis": {"min": 5, "max": 20},
+      "data": {"series": [
+        {"name": "load", "color": "#00ff00", "values": [
+          {"x": "2026-01-01T00:00:00Z", "y": 0.1}, {"x": "2026-01-01T01:00:00Z", "y": 0.3}, {"x": "2026-01-01T02:00:00Z", "y": 0.2},
+          {"x": "2026-01-01T03:00:00Z", "y": 0.6}, {"x": "2026-01-01T04:00:00Z", "y": 0.5}, {"x": "2026-01-01T05:00:00Z", "y": 0.8},
+          {"x": "2026-01-01T06:00:00Z", "y": 0.7}, {"x": "2026-01-01T07:00:00Z", "y": 0.9}, {"x": "2026-01-01T08:00:00Z", "y": 0.4},
+          {"x": "2026-01-01T09:00:00Z", "y": 0.6}, {"x": "2026-01-01T10:00:00Z", "y": 0.2}]},
+        {"name": "temp", "color": "#ff0000", "y_axis": "right", "values": [
+          {"x": "2026-01-01T00:00:00Z", "y": 19}, {"x": "2026-01-01T01:00:00Z", "y": 17}, {"x": "2026-01-01T02:00:00Z", "y": 18},
+          {"x": "2026-01-01T03:00:00Z", "y": 14}, {"x": "2026-01-01T04:00:00Z", "y": 15}, {"x": "2026-01-01T05:00:00Z", "y": 11},
+          {"x": "2026-01-01T06:00:00Z", "y": 12}, {"x": "2026-01-01T07:00:00Z", "y": 8}, {"x": "2026-01-01T08:00:00Z", "y": 9},
+          {"x": "2026-01-01T09:00:00Z", "y": 6}, {"x": "2026-01-01T10:00:00Z", "y": 5}]}]}}
+  },
+  "timeseries-y2-auto-hours": {
+    "spec": {"type": "timeseries", "width": 56, "height": 12,
+      "x_axis": {"format": {"kind": "time", "layout": "15:04"}},
+      "y_axis": {"format": {"kind": "percent"}},
+      "y2_axis": {"format": {"kind": "si", "precision": 0}},
+      "data": {"x_axis_data": ["2026-03-01T08:00:00+01:00", "2026-03-01T09:30:00+01:00", "2026-03-01T11:00:00.5+01:00", "2026-03-01T12:15:00Z", "2026-03-01T14:00:00Z"],
+        "series": [
+        {"name": "cpu", "values": [{"y": 0.21}, {"y": 0.45}, {"y": 0.33}, {"y": 0.72}, {"y": 0.58}]},
+        {"name": "req", "color": "#ffaa00", "y_axis": "right", "values": [{"y": 1200}, {"y": 5400}, {"y": 3100}, {"y": 9800}, {"y": 7600}]}]}}
+  },
+  "timeseries-log-currency": {
+    "spec": {"type": "timeseries", "width": 44, "height": 9,
+      "y_axis": {"scale": "log", "format": {"kind": "currency"}},
+      "data": {"series": [{"name": "revenue", "values": [
+        {"x": "2026-01-01", "y": 2.5}, {"x": "2026-01-02", "y": 4}, {"x": "2026-01-03", "y": 9}, {"x": "2026-01-04", "y": 30},
+        {"x": "2026-01-05", "y": 55}, {"x": "2026-01-06", "y": 180}, {"x": "2026-01-07", "y": 700}, {"x": "2026-01-08", "y": 1500},
+        {"x": "2026-01-09", "y": 4200}, {"x": "2026-01-10", "y": 9800}]}]}}
+  },
+  "timeseries-singleton": {
+    "spec": {"type": "timeseries", "width": 40, "height": 10,
+      "data": {"series": [{"name": "a", "values": [{"x": "2026-01-01T00:00:00.000000001Z", "y": 3}, {"x": "2026-01-01T00:00:00.000000002Z", "y": 5}]}]}}
+  },
+  "timeseries-merged-names": {
+    "spec": {"type": "timeseries", "width": 48, "height": 12,
+      "y_axis": {"max": 30},
+      "data": {"series": [
+        {"name": "a", "values": [{"x": "2026-02-01", "y": 5}, {"x": "2026-02-03", "y": 9}]},
+        {"name": "b", "type": "line", "color": "#ff00ff", "values": [{"x": "2026-02-02", "y": 12}, {"x": "2026-02-05", "y": 20}, {"x": "not a time", "y": 99}]},
+        {"name": "a", "values": [{"x": "2026-02-04", "y": 7}, {"x": "2026-02-06", "y": 14}]}]}}
+  },
+  "ohlc-line": {
+    "spec": {"type": "ohlc", "width": 60, "height": 12,
+      "x_axis": {"format": {"kind": "time", "layout": "Jan 02"}},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-05", "o": 100, "h": 108, "l": 97, "c": 105},
+        {"t": "2026-01-06", "o": 105, "h": 112, "l": 103, "c": 110},
+        {"t": "2026-01-07", "o": 110, "h": 111, "l": 98, "c": 99},
+        {"t": "2026-01-08", "o": 99, "h": 106, "l": 96, "c": 104}]}]}}
+  },
+  "ohlc-default": {
+    "spec": {"type": "ohlc", "width": 40, "height": 12,
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-05", "o": 100, "h": 108, "l": 97, "c": 105},
+        {"t": "2026-01-06", "o": 105, "h": 112, "l": 103, "c": 110},
+        {"t": "2026-01-07", "o": 110, "h": 111, "l": 98, "c": 99},
+        {"t": "2026-01-08", "o": 99, "h": 106, "l": 96, "c": 104}]}]}}
+  },
+  "ohlc-block-palette": {
+    "spec": {"type": "ohlc", "width": 64, "height": 14,
+      "y_axis": {"min": 90, "format": {"kind": "currency", "precision": 0}},
+      "options": {"candle_style": "block"},
+      "theme": {"palette": ["#00ffaa", "#ff0066"]},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-03-02T00:00:00Z", "o": 100, "h": 104, "l": 98, "c": 103},
+        {"t": "2026-03-03T00:00:00Z", "o": 103, "h": 109, "l": 101, "c": 108},
+        {"t": "2026-03-04T00:00:00Z", "o": 108, "h": 110, "l": 99.5, "c": 101},
+        {"t": "2026-03-05T00:00:00Z", "o": 101, "h": 103, "l": 95, "c": 96},
+        {"t": "2026-03-06T00:00:00Z", "o": 96, "h": 104, "l": 95.5, "c": 103.5},
+        {"t": "2026-03-09T00:00:00Z", "o": 103.5, "h": 112, "l": 103, "c": 111}]}]}}
+  },
+  "ohlc-log-ms": {
+    "spec": {"type": "ohlc", "width": 44, "height": 14,
+      "y_axis": {"scale": "log"},
+      "data": {"series": [{"name": "a", "ohlc": [
+        {"t": 1, "o": 2, "h": 5000, "l": 2, "c": 2},
+        {"t": 10, "o": 40, "h": 5000, "l": 2, "c": 40},
+        {"t": 100, "o": 5000, "h": 5000, "l": 2, "c": 5000}]}]}}
+  },
+  "ohlc-dense": {
+    "spec": {"type": "ohlc", "width": 30, "height": 10,
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-02-01", "o": 100, "h": 101, "l": 99, "c": 100.5}, {"t": "2026-02-02", "o": 100.5, "h": 102, "l": 100, "c": 101.5},
+        {"t": "2026-02-03", "o": 101.5, "h": 102, "l": 99.5, "c": 100}, {"t": "2026-02-04", "o": 100, "h": 100.5, "l": 98, "c": 98.5},
+        {"t": "2026-02-05", "o": 98.5, "h": 99, "l": 97, "c": 98.8}, {"t": "2026-02-06", "o": 98.8, "h": 101, "l": 98.5, "c": 100.7},
+        {"t": "2026-02-07", "o": 100.7, "h": 103, "l": 100.2, "c": 102.9}, {"t": "2026-02-08", "o": 102.9, "h": 104, "l": 101, "c": 101.2},
+        {"t": "2026-02-09", "o": 101.2, "h": 101.5, "l": 99, "c": 99.4}, {"t": "2026-02-10", "o": 99.4, "h": 100, "l": 98.1, "c": 99.9},
+        {"t": "2026-02-11", "o": 99.9, "h": 102.2, "l": 99.6, "c": 102}, {"t": "2026-02-12", "o": 102, "h": 102.4, "l": 100.4, "c": 100.8},
+        {"t": "2026-02-13", "o": 100.8, "h": 101, "l": 99, "c": 99.2}, {"t": "2026-02-14", "o": 99.2, "h": 100.9, "l": 98.8, "c": 100.6}]}]}}
+  },
+  "ohlc-volume": {
+    "spec": {"type": "ohlc", "width": 80, "height": 24,
+      "x_axis": {"format": {"kind": "time", "layout": "Jan 02"}},
+      "options": {"volume": true},
+      "theme": {"palette": ["#123456", "#abcdef"]},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-05", "o": 100, "h": 108, "l": 97, "c": 105, "v": 12300},
+        {"t": "2026-01-06", "o": 105, "h": 112, "l": 103, "c": 110, "v": 9800},
+        {"t": "2026-01-07", "o": 110, "h": 111, "l": 98, "c": 99, "v": 15100},
+        {"t": "2026-01-08", "o": 99, "h": 106, "l": 96, "c": 104, "v": 7400}]}]}}
+  },
+  "ohlc-volume-block-gaps": {
+    "spec": {"type": "ohlc", "width": 60, "height": 18,
+      "y_axis": {"format": {"kind": "number", "precision": 1}},
+      "options": {"volume": true, "candle_style": "block"},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-01", "o": 102, "h": 110, "l": 100, "c": 108, "v": 1200000},
+        {"t": "2026-01-02", "o": 108, "h": 112, "l": 104, "c": 105, "v": 2500000},
+        {"t": "2026-01-03", "o": 105, "h": 109, "l": 103, "c": 107},
+        {"t": "2026-01-10", "o": 107, "h": 115, "l": 106, "c": 114, "v": 0},
+        {"t": "2026-01-11", "o": 114, "h": 116, "l": 108, "c": 109, "v": 3100000},
+        {"t": "2026-01-12", "o": 109, "h": 111, "l": 101, "c": 102, "v": 800000}]}]}}
+  },
+  "ohlc-volume-resize": {
+    "spec": {"type": "ohlc", "width": 40, "height": 16,
+      "x_axis": {"format": {"kind": "time", "layout": "Jan 02"}},
+      "options": {"volume": true},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-05", "o": 100, "h": 108, "l": 97, "c": 105, "v": 12300},
+        {"t": "2026-01-06", "o": 105, "h": 112, "l": 103, "c": 110, "v": 12300},
+        {"t": "2026-01-07", "o": 110, "h": 111, "l": 98, "c": 99, "v": 12300},
+        {"t": "2026-01-08", "o": 99, "h": 106, "l": 96, "c": 104, "v": 12300}]}]}},
+    "resize": [[60, 30], [1, 1], [32, 12]]
+  },
+  "ohlc-volume-update": {
+    "spec": {"type": "ohlc", "width": 40, "height": 16,
+      "options": {"volume": true},
+      "data": {"series": [{"name": "px", "ohlc": [
+        {"t": "2026-01-05", "o": 100, "h": 108, "l": 97, "c": 105, "v": 500},
+        {"t": "2026-01-06", "o": 105, "h": 112, "l": 103, "c": 110, "v": 900},
+        {"t": "2026-01-07", "o": 110, "h": 111, "l": 98, "c": 99, "v": 300}]}]}},
+    "update": [[50, 14]]
+  },
+  "heatmap-cells": {
+    "spec": {"type": "heatmap", "width": 30, "height": 10,
+      "heat": {"cells": [{"x": 0, "y": 0, "z": 1}, {"x": 1, "y": 0, "z": 5}, {"x": 2, "y": 0, "z": 9},
+        {"x": 0, "y": 1, "z": 3}, {"x": 1, "y": 1, "z": 7}, {"x": 2, "y": 1, "z": 2}]},
+      "theme": {"gradient": ["#000044", "#ff4400"]}}
+  },
+  "heatmap-labels": {
+    "spec": {"type": "heatmap", "width": 40, "height": 14,
+      "x_axis": {"labels": ["09", "12", "15"]},
+      "y_axis": {"labels": ["Mon", "Tuesday", "Wed", "Thu"]},
+      "heat": {"cells": [{"x": 0, "y": 0, "z": 1}, {"x": 1, "y": 0, "z": 5}, {"x": 2, "y": 0, "z": 9},
+        {"x": 0, "y": 1, "z": 3}, {"x": 1, "y": 1, "z": 7}, {"x": 2, "y": 1, "z": 2},
+        {"x": 0, "y": 2, "z": 4}, {"x": 1, "y": 2, "z": 6}, {"x": 2, "y": 2, "z": 8}]},
+      "theme": {"gradient": ["#000044", "#22aa88", "#ff4400"]}}
+  },
+  "heatmap-matrix-pinned": {
+    "spec": {"type": "heatmap", "width": 36, "height": 9,
+      "x_axis": {"labels": ["a", "b", "c", "d"]},
+      "y_axis": {"labels": ["r0", "r1"]},
+      "heat": {"matrix": [[1, 5, 9, 12], [3, 7, 2, -4]], "min_value": 0, "max_value": 10},
+      "theme": {"gradient": ["#ffffff", "#0000ff"]}}
+  },
+  "heatmap-default-scale": {
+    "spec": {"type": "heatmap", "width": 28, "height": 9,
+      "x_axis": {"labels": ["09", "12", "15", "18"]},
+      "y_axis": {"labels": ["Mon", "Tue", "Wed"]},
+      "heat": {"matrix": [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]], "max_value": 20}}
+  },
+  "heatmap-fractional": {
+    "spec": {"type": "heatmap", "width": 24, "height": 8,
+      "heat": {"cells": [{"x": 0.5, "y": 0, "z": 2}, {"x": 2.7, "y": 1.2, "z": 8}, {"x": 1, "y": 3, "z": 5}]},
+      "theme": {"gradient": ["#102030"]}}
+  },
+  "sparkline": {
+    "spec": {"type": "sparkline", "title": "CPU Usage", "width": 30, "height": 4,
+      "data": {"series": [{"name": "cpu", "values": [{"y": 1}, {"y": 4}, {"y": 2}, {"y": 7}, {"y": 5}, {"y": 9}, {"y": 3}]}]}}
+  },
+  "sparkline-max-color": {
+    "spec": {"type": "sparkline", "width": 20, "height": 5,
+      "y_axis": {"max": 20, "min": 5},
+      "theme": {"palette": ["#ff8800"]},
+      "data": {"series": [{"name": "cpu", "values": [{"y": 1}, {"y": 14}, {"y": 2}, {"y": 17}, {"y": 5}, {"y": 19}, {"y": 3}, {"y": 11}]}]}}
+  },
+  "categorical-line": {
+    "spec": {"type": "line", "width": 44, "height": 15,
+      "x_axis": {"type": "category", "labels": ["Before", "Middle", "After"]},
+      "y_axis": {"min": 0, "max": 10},
+      "data": {"series": [
+        {"name": "sample", "values": [{"x": "After", "y": 5}, {"x": "Before", "y": 2}]},
+        {"name": "full", "color": "#00aaff", "values": [{"x": "Middle", "y": 8}, {"x": "Before", "y": 4}, {"x": "After", "y": 9}]}]}}
+  },
+  "categorical-shared": {
+    "spec": {"type": "line", "width": 50, "height": 12,
+      "x_axis": {"type": "category", "format": {"kind": "si"}},
+      "y_axis": {"format": {"kind": "si"}},
+      "data": {"x_axis_data": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        "series": [{"name": "s", "color": "#ffcc00", "values": [{"y": 1200}, {"y": 3400}, {"y": 2800}, {"y": 5100}, {"y": 4700}, {"y": 6900}]}]}}
+  },
+  "categorical-scatter-dual-log": {
+    "spec": {"type": "scatter", "width": 44, "height": 15,
+      "x_axis": {"type": "category", "labels": ["Before", "Middle", "After"]},
+      "y_axis": {"scale": "log", "min": 1, "max": 10},
+      "y2_axis": {"scale": "log", "min": 100, "max": 1000},
+      "data": {"series": [
+        {"name": "sample", "values": [{"x": "After", "y": 5}, {"x": "Before", "y": 5}, {"x": "Before", "y": 8}]},
+        {"name": "right", "color": "#ff0000", "y_axis": "right", "values": [{"x": "Middle", "y": 300}]}]}}
+  },
+  "categorical-resize": {
+    "spec": {"type": "scatter", "width": 44, "height": 15,
+      "x_axis": {"type": "category", "labels": ["Before", "Middle", "After"]},
+      "y_axis": {"min": 0, "max": 10},
+      "data": {"series": [{"name": "sample", "values": [{"x": "After", "y": 5}, {"x": "Before", "y": 5}, {"x": "Before", "y": 8}]}]}},
+    "resize": [[80, 24], [12, 6], [0, 0], [30, 10]]
+  },
+  "categorical-update": {
+    "spec": {"type": "line", "width": 44, "height": 15,
+      "x_axis": {"type": "category", "labels": ["one", "two", "three", "four", "five"]},
+      "data": {"series": [{"name": "s", "values": [{"y": 3}, {"y": 1}, {"y": 4}, {"x": "five", "y": 5}]}]}},
+    "update": [[60, 12]]
+  },
+  "combo-basic": {
+    "spec": {"type": "bar", "width": 64, "height": 16,
+      "x_axis": {"type": "category", "labels": ["C", "A", "B"]},
+      "y_axis": {"format": {"kind": "currency"}},
+      "y2_axis": {"format": {"kind": "percent"}},
+      "data": {"series": [
+        {"name": "sales", "type": "bar", "y_axis": "left", "values": [{"x": "B", "y": -20}, {"x": "C", "y": 40}]},
+        {"name": "rate", "type": "line", "y_axis": "right", "values": [{"x": "B", "y": 0.3}, {"x": "C", "y": 0.1}, {"x": "A", "y": 0.2}]}]}}
+  },
+  "combo-overlay-pinned": {
+    "spec": {"type": "bar", "width": 64, "height": 16,
+      "x_axis": {"labels": ["C", "A", "B"]},
+      "y_axis": {"min": -10, "max": 10},
+      "y2_axis": {"min": -10, "max": 10},
+      "data": {"series": [
+        {"name": "sales", "color": "#123abc", "values": [{"y": 10}, {"y": -10}, {"y": 10}]},
+        {"name": "rate", "type": "line", "color": "#ff9900", "y_axis": "right", "values": [{"y": 5}, {"y": -5}, {"y": 5}]}]}}
+  },
+  "combo-palette-shared": {
+    "spec": {"type": "bar", "width": 70, "height": 14,
+      "theme": {"palette": ["", "#cc00cc"], "foreground": "#888888"},
+      "y2_axis": {"min": 0, "max": 1, "format": {"kind": "number", "precision": 2}},
+      "data": {"x_axis_data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "series": [
+        {"name": "rate", "type": "line", "y_axis": "right", "values": [{"y": -0.5}, {"y": 0.4}, {"y": 2}, {"y": 0.7}, {"x": "Sat", "y": 0.2}]},
+        {"name": "orders", "values": [{"y": 12}, {"y": 0}, {"y": 30}, {"y": 22}, {"y": 9}, {"y": 17}]}]}}
+  },
+  "combo-resize": {
+    "spec": {"type": "bar", "width": 64, "height": 16,
+      "x_axis": {"labels": ["C", "A", "B"]},
+      "y2_axis": {},
+      "data": {"series": [
+        {"name": "sales", "type": "bar", "values": [{"y": 10}, {"y": 10}, {"y": 10}]},
+        {"name": "rate", "type": "line", "y_axis": "right", "values": [{"x": "C", "y": 100}, {"x": "B", "y": 100}]}]}},
+    "resize": [[30, 8], [3, 2], [80, 20]]
+  },
+  "combo-update": {
+    "spec": {"type": "bar", "width": 40, "height": 10,
+      "x_axis": {"labels": ["x", "y"]},
+      "y2_axis": {},
+      "data": {"series": [
+        {"name": "b", "values": [{"y": 3}, {"y": -1}]},
+        {"name": "l", "type": "line", "y_axis": "right", "values": [{"y": 1}, {"y": 2}]}]}},
+    "update": [[52, 12]]
+  },
+  "err-no-type": {"spec": {"width": 10, "height": 5}},
+  "err-unknown-type": {"spec": {"type": "pie", "width": 10, "height": 5, "data": {"series": [{"name": "a", "values": [{"y": 1}]}]}}},
+  "err-size": {"spec": {"type": "line", "width": 0, "height": 5}},
+  "err-no-series": {"spec": {"type": "line", "width": 10, "height": 5, "data": {"series": []}}},
+  "err-heat-required": {"spec": {"type": "heatmap", "width": 10, "height": 5}},
+  "err-volume-type": {"spec": {"type": "line", "width": 10, "height": 5, "options": {"volume": true}, "data": {"series": [{"name": "a", "values": [{"y": 1}]}]}}},
+  "err-negative-volume": {"spec": {"type": "ohlc", "width": 40, "height": 12, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0, "c": 1}, {"t": "2026-01-02", "o": 1, "h": 2, "l": 0, "c": 1, "v": -3}]}]}}},
+  "err-series-name": {"spec": {"type": "line", "width": 10, "height": 5, "data": {"series": [{"name": "a", "values": []}, {"values": []}]}}},
+  "err-series-type": {"spec": {"type": "line", "width": 10, "height": 5, "data": {"series": [{"name": "a\t\"q\"", "type": "donut", "values": []}]}}},
+  "err-series-yaxis": {"spec": {"type": "line", "width": 10, "height": 5, "data": {"series": [{"name": "a", "y_axis": "middle", "values": []}]}}},
+  "err-right-needs-y2": {"spec": {"type": "line", "width": 10, "height": 5, "data": {"series": [{"name": "a", "y_axis": "right", "values": []}]}}},
+  "err-same-name-axes": {"spec": {"type": "line", "width": 10, "height": 5, "y2_axis": {}, "data": {"series": [{"name": "a\t\"é\u0001\u00ad\ud83d\ude00", "y_axis": "right", "values": []}, {"name": "b", "values": []}, {"name": "a\t\"é\u0001\u00ad\ud83d\ude00", "values": []}]}}},
+  "err-x-axis-type": {"spec": {"type": "line", "width": 10, "height": 5, "x_axis": {"type": "logarithmic"}, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-ohlc-points": {"spec": {"type": "ohlc", "width": 10, "height": 5, "data": {"series": [{"name": "a", "values": [{"y": 1}]}]}}},
+  "err-orientation": {"spec": {"type": "bar", "width": 10, "height": 5, "options": {"orientation": "diagonal"}, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-format-kind": {"spec": {"type": "bar", "width": 10, "height": 5, "y_axis": {"format": {"kind": "roman"}}, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-scale": {"spec": {"type": "bar", "width": 10, "height": 5, "y2_axis": {"scale": "symlog"}, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-grouped-bars": {"spec": {"type": "bar", "width": 40, "height": 10, "x_axis": {"labels": ["a"]}, "data": {"series": [{"name": "a", "values": [{"y": 1}]}, {"name": "b", "values": [{"y": 2}]}]}}},
+  "err-bar-no-labels": {"spec": {"type": "bar", "width": 40, "height": 10, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-bar-inverted": {"spec": {"type": "bar", "width": 40, "height": 10, "y_axis": {"min": 10, "max": 2.5}, "data": {"series": [{"name": "a", "values": [{"x": "q", "y": 1}]}]}}},
+  "err-series-mix": {"spec": {"type": "scatter", "width": 40, "height": 10, "data": {"series": [{"name": "a", "type": "line", "values": [{"y": 1}]}]}}},
+  "err-y2-unsupported": {"spec": {"type": "sparkline", "width": 40, "height": 10, "y2_axis": {}, "data": {"series": [{"name": "a", "values": [{"y": 1}]}]}}},
+  "err-log-bar": {"spec": {"type": "bar", "width": 40, "height": 10, "x_axis": {"labels": ["a"]}, "y_axis": {"scale": "log"}, "data": {"series": [{"name": "a", "values": [{"y": 1}]}]}}},
+  "err-log-time-x": {"spec": {"type": "timeseries", "width": 40, "height": 10, "x_axis": {"scale": "log"}, "data": {"series": [{"name": "a", "values": [{"x": "2026-01-01", "y": 1}]}]}}},
+  "err-log-value": {"spec": {"type": "line", "width": 40, "height": 10, "y_axis": {"scale": "log"}, "data": {"series": [{"name": "a", "values": [{"x": 1, "y": 2}, {"x": 2, "y": -0.25}]}]}}},
+  "err-log-x-index": {"spec": {"type": "scatter", "width": 40, "height": 10, "x_axis": {"scale": "log"}, "data": {"series": [{"name": "a", "values": [{"y": 2}, {"y": 3}]}]}}},
+  "err-log-pin": {"spec": {"type": "ohlc", "width": 40, "height": 10, "y_axis": {"scale": "log", "max": -5}, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0.5, "c": 1}]}]}}},
+  "err-log-ohlc-low": {"spec": {"type": "ohlc", "width": 40, "height": 10, "y_axis": {"scale": "log"}, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0, "c": 1}]}]}}},
+  "err-y-inverted": {"spec": {"type": "line", "width": 40, "height": 10, "y_axis": {"min": 50}, "data": {"series": [{"name": "a", "values": [{"x": 0, "y": 1}, {"x": 1, "y": 5}]}]}}},
+  "err-y2-equal-pins": {"spec": {"type": "timeseries", "width": 40, "height": 10, "y2_axis": {"min": 7, "max": 7}, "data": {"series": [{"name": "a", "y_axis": "right", "values": [{"x": "2026-01-01", "y": 1}]}]}}},
+  "err-too-small": {"spec": {"type": "line", "width": 40, "height": 2, "data": {"series": [{"name": "a", "values": [{"x": 0, "y": 1}]}]}}},
+  "err-ts-no-time": {"spec": {"type": "timeseries", "width": 40, "height": 10, "data": {"series": [{"name": "a", "values": [{"x": "yesterday", "y": 1}, {"x": true, "y": 2}]}]}}},
+  "err-ohlc-two-series": {"spec": {"type": "ohlc", "width": 40, "height": 10, "data": {"series": [{"name": "a", "ohlc": [{"t": 0, "o": 1, "h": 2, "l": 0, "c": 1}]}, {"name": "b"}]}}},
+  "err-ohlc-bad-time": {"spec": {"type": "ohlc", "width": 40, "height": 10, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0, "c": 1}, {"t": "2026-13-01", "o": 1, "h": 2, "l": 0, "c": 1}]}]}}},
+  "err-ohlc-null-time": {"spec": {"type": "ohlc", "width": 40, "height": 10, "data": {"series": [{"name": "a", "ohlc": [{"t": null, "o": 1, "h": 2, "l": 0, "c": 1}]}]}}},
+  "err-candle-style": {"spec": {"type": "ohlc", "width": 40, "height": 10, "options": {"candle_style": "bogus"}, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0, "c": 1}]}]}}},
+  "err-volume-rows": {"spec": {"type": "ohlc", "width": 40, "height": 6, "options": {"volume": true}, "data": {"series": [{"name": "a", "ohlc": [{"t": "2026-01-01", "o": 1, "h": 2, "l": 0, "c": 1, "v": 5}]}]}}},
+  "err-heat-negative": {"spec": {"type": "heatmap", "width": 40, "height": 10, "heat": {"cells": [{"x": 0, "y": 0, "z": 1}, {"x": -1, "y": 0.5, "z": 1}]}}},
+  "err-heat-range": {"spec": {"type": "heatmap", "width": 40, "height": 10, "heat": {"cells": [{"x": 0, "y": 0, "z": 1}, {"x": 1, "y": 0, "z": 5}], "min_value": 6}}},
+  "err-gradient": {"spec": {"type": "heatmap", "width": 40, "height": 10, "heat": {"cells": [{"x": 0, "y": 0, "z": 1}]}, "theme": {"gradient": ["#000000", "#12345g"]}}},
+  "err-sparkline-series": {"spec": {"type": "sparkline", "width": 40, "height": 10, "data": {"series": [{"name": "a", "values": []}, {"name": "b", "values": []}]}}},
+  "err-streamline": {"spec": {"type": "streamline", "width": 40, "height": 10, "data": {"series": [{"name": "a", "values": []}]}}},
+  "err-categorical-dup": {"spec": {"type": "line", "width": 40, "height": 10, "x_axis": {"type": "category", "labels": ["a", "b"]}, "data": {"series": [{"name": "s", "values": [{"x": "a", "y": 1}, {"x": "a", "y": 2}]}]}}},
+  "err-categorical-unknown": {"spec": {"type": "scatter", "width": 40, "height": 10, "x_axis": {"type": "category", "labels": ["a", "b"]}, "data": {"series": [{"name": "s", "values": [{"x": "zzz", "y": 1}]}]}}},
+  "err-categorical-numeric": {"spec": {"type": "line", "width": 40, "height": 10, "x_axis": {"type": "category"}, "data": {"series": [{"name": "s", "values": [{"x": 42, "y": 1}]}]}}},
+  "err-combo-axes": {"spec": {"type": "bar", "width": 40, "height": 10, "x_axis": {"labels": ["a"]}, "y2_axis": {}, "data": {"series": [{"name": "b", "values": [{"y": 1}]}, {"name": "l", "type": "line", "values": [{"y": 1}]}]}}},
+  "err-combo-zero": {"spec": {"type": "bar", "width": 40, "height": 10, "x_axis": {"labels": ["a"]}, "y_axis": {"min": 1}, "y2_axis": {}, "data": {"series": [{"name": "b", "values": [{"y": 3}]}, {"name": "l", "type": "line", "y_axis": "right", "values": [{"y": 1}]}]}}},
+  "err-combo-dup-category": {"spec": {"type": "bar", "width": 40, "height": 10, "x_axis": {"labels": ["a", "a"]}, "y2_axis": {}, "data": {"series": [{"name": "b", "values": [{"y": 3}]}, {"name": "l", "type": "line", "y_axis": "right", "values": [{"y": 1}]}]}}},
+  "err-combo-too-small": {"spec": {"type": "bar", "width": 1, "height": 1, "x_axis": {"labels": ["a"]}, "y2_axis": {}, "data": {"series": [{"name": "b", "values": [{"y": 3}]}, {"name": "l", "type": "line", "y_axis": "right", "values": [{"y": 1}]}]}}}
+}

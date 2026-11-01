@@ -1,0 +1,24 @@
+{
+  "type": "timeseries",
+  "title": "Server load and temperature",
+  "width": 64,
+  "height": 16,
+  "x_axis": {"type": "time", "format": {"kind": "time", "layout": "15:04"}},
+  "y_axis": {"title": "Load", "min": 0, "max": 1, "format": {"kind": "percent"}},
+  "y2_axis": {"title": "Temperature", "min": 15, "max": 45, "format": {"kind": "number", "precision": 0}},
+  "data": {
+    "x_axis_data": [
+      "2026-03-01T08:00:00Z", "2026-03-01T09:00:00Z", "2026-03-01T10:00:00Z", "2026-03-01T11:00:00Z",
+      "2026-03-01T12:00:00Z", "2026-03-01T13:00:00Z", "2026-03-01T14:00:00Z", "2026-03-01T15:00:00Z",
+      "2026-03-01T16:00:00Z", "2026-03-01T17:00:00Z", "2026-03-01T18:00:00Z", "2026-03-01T19:00:00Z"
+    ],
+    "series": [
+      {"name": "load", "color": "#4fc3f7", "values": [
+        {"y": 0.21}, {"y": 0.34}, {"y": 0.52}, {"y": 0.61}, {"y": 0.78}, {"y": 0.83},
+        {"y": 0.74}, {"y": 0.66}, {"y": 0.58}, {"y": 0.47}, {"y": 0.36}, {"y": 0.29}]},
+      {"name": "temperature", "color": "#ff8a65", "y_axis": "right", "values": [
+        {"y": 22}, {"y": 24}, {"y": 27}, {"y": 31}, {"y": 36}, {"y": 39},
+        {"y": 38}, {"y": 35}, {"y": 32}, {"y": 29}, {"y": 26}, {"y": 24}]}
+    ]
+  }
+}

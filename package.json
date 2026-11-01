@@ -66,6 +66,11 @@
       "types": "./dist/linechart/wavelinechart/index.d.ts",
       "import": "./dist/linechart/wavelinechart/index.js",
       "require": "./dist/linechart/wavelinechart/index.cjs"
+    },
+    "./spec": {
+      "types": "./dist/spec/index.d.ts",
+      "import": "./dist/spec/index.js",
+      "require": "./dist/spec/index.cjs"
     }
   },
   "files": [
