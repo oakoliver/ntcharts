@@ -354,7 +354,7 @@ The port follows ntcharts v2.9.0 (Bubble Tea v2 branch, tag `v2.9.0`), and its o
 
 What differs from Go, on purpose:
 
-- **Mutable models.** Go models are values: `m, cmd = m.Update(msg)` returns a copy. Here `update(msg)` changes the chart and returns it, like the components of `@oakoliver/bubbles`. `clone()` gives you a copy where you need one.
+- **Mutable models.** Go models are values: `m, cmd = m.Update(msg)` returns a copy. Here `update(msg)` changes the chart and returns it. `clone()` gives you a copy where you need one.
 - **Messages by tag.** The charts recognise Bubble Tea messages by their `_tag` (`'KeyPressMsg'`, `'MouseWheelMsg'`, …), not by class, and never import Bubble Tea at runtime.
 - **No WASM yielding.** Upstream's heatmap yields to the Go WASM event loop while it draws; JavaScript drawing is synchronous, so there is nothing to port.
 
