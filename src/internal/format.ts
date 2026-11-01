@@ -34,3 +34,31 @@ export function sprintfF(v: number, prec: number): string {
   }
   return neg ? '-' + s : s;
 }
+
+/**
+ * Go's fmt.Sprint(v) / "%v" for a float64: the shortest decimal that reads
+ * back as v, in exponent form ("1e+06", "1e-05") when the exponent is below
+ * -4 or at least 6 (strconv's %g rule for the shortest precision).
+ */
+export function sprintV(v: number): string {
+  if (Number.isNaN(v)) return 'NaN';
+  if (v === Infinity) return '+Inf';
+  if (v === -Infinity) return '-Inf';
+  if (v === 0) return Object.is(v, -0) ? '-0' : '0';
+  const neg = v < 0;
+  const [mant, e] = Math.abs(v).toExponential().split('e');
+  const digits = mant.replace('.', '');
+  const exp = Number(e);
+  let s: string;
+  if (exp < -4 || exp >= 6) {
+    const a = Math.abs(exp);
+    s = `${mant}e${exp < 0 ? '-' : '+'}${a < 10 ? '0' : ''}${a}`;
+  } else if (exp < 0) {
+    s = '0.' + '0'.repeat(-exp - 1) + digits;
+  } else if (digits.length <= exp + 1) {
+    s = digits + '0'.repeat(exp + 1 - digits.length);
+  } else {
+    s = digits.slice(0, exp + 1) + '.' + digits.slice(exp + 1);
+  }
+  return neg ? '-' + s : s;
+}
